@@ -1,0 +1,37 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Dao;
+
+import Models.User;
+import java.sql.*;
+
+
+/**
+ *
+ * @author iahk1510
+ */
+public class UserDao extends DAO{
+
+    public UserDao() throws ClassNotFoundException, SQLException {
+        super();
+    }
+    
+    public User checkuser(User user) throws SQLException{
+        String sql = "select * from tbluser where username = ? and password = ? and status = 0";
+        PreparedStatement st = con.prepareStatement(sql);
+        st.setString(1, user.getUsername());
+        st.setString(2, user.getPassword());
+        ResultSet rs = st.executeQuery();
+        while (rs.next()){
+            user.setFullname(rs.getString("fullname"));
+            user.setStatus(0);
+            user.setId(rs.getInt("id"));
+            return user;
+        }
+        return null;
+        
+    }
+    
+}
