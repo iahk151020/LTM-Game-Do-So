@@ -24,8 +24,8 @@ public class Home extends javax.swing.JFrame {
         cl = new CardLayout();
         this.setLayout(cl);
         
-        loginV = new Login();
-        mainV = new MainUI();
+        loginV = new Login(cl);
+        mainV = new MainUI(cl);
         
         //Thêm các View Panel vào Home JFrame 
         this.add(loginV, "login");

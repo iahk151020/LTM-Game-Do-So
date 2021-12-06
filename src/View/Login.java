@@ -5,6 +5,7 @@
 package View;
 
 import Models.User;
+import java.awt.CardLayout;
 import java.awt.event.ActionListener;
 
 /**
@@ -16,8 +17,10 @@ public class Login extends javax.swing.JPanel {
     /**
      * Creates new form JPanel
      */
-    public Login() {
+    private CardLayout cl;
+    public Login(CardLayout cl) {
         initComponents();
+        this.cl = cl;
     }
 
     /**

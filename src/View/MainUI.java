@@ -4,6 +4,8 @@
  */
 package View;
 
+import java.awt.CardLayout;
+
 /**
  *
  * @author iahk1510
@@ -13,8 +15,10 @@ public class MainUI extends javax.swing.JPanel {
     /**
      * Creates new form JPanel_1
      */
-    public MainUI() {
+    private CardLayout cl;
+    public MainUI(CardLayout cl) {
         initComponents();
+        this.cl = cl;
     }
 
     /**
