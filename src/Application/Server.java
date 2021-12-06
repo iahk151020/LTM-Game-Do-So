@@ -4,10 +4,16 @@
  */
 package Application;
 
+import Controller.ServerController;
+import java.io.IOException;
+import java.sql.SQLException;
+
 /**
  *
  * @author iahk1510
  */
 public class Server {
-    
+    public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException {
+        ServerController server = new ServerController();
+    }
 }

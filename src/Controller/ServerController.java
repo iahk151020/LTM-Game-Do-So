@@ -27,7 +27,7 @@ public class ServerController {
     private List<User> onlinePlayers;
     private UserDao userDao;
    
-    public ServerController() throws IOException {
+    public ServerController() throws IOException, ClassNotFoundException, SQLException {
         onlinePlayers = new ArrayList<User>();
         serverSocket = new ServerSocket(port);
         userDao = new UserDao();
@@ -60,6 +60,8 @@ public class ServerController {
                     case 1:
                         User userInfo = (User)req.getData();
                         User user = userDao.checkuser(userInfo);
+                        userDao.online(user);
+                        onlinePlayers.add(user);
                         oos.writeObject(new Response(1, user));
                         oos.flush();
                         break;
@@ -68,6 +70,8 @@ public class ServerController {
                     case 3: 
                         break;
                     case 4:
+                        oos.writeObject(new Response(4, onlinePlayers));
+                        oos.flush();
                         break;
                     case 5: 
                         break;

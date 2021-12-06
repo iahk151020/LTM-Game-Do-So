@@ -7,6 +7,7 @@ package View;
 import Models.User;
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 /**
  *
@@ -15,11 +16,21 @@ import java.awt.event.ActionListener;
 public class Home extends javax.swing.JFrame {
 
     private CardLayout cl;
+    private Login loginV;
+    private MainUI mainV;
     
     public Home() {
         initComponents();
         cl = new CardLayout();
         this.setLayout(cl);
+        
+        loginV = new Login(cl);
+        mainV = new MainUI(cl);
+        
+        //Thêm các View Panel vào Home JFrame 
+        this.add(loginV, "login");
+        this.add(mainV, "main");
+        
         
         
         
@@ -87,15 +98,19 @@ public class Home extends javax.swing.JFrame {
     }
 
     public void addListener(ActionListener login) {
-         
+         loginV.addListener(login); //Add Login Listener vào Login view;
     }
 
     public User getLogin() {
-        return loginView.getLogin();
+        return loginV.getLogin();
     }
 
     public void nextUI(String ui) {
         cl.show(this, ui);
+    }
+
+    public void setOnlinePlayer(List<User> onlinePlayers) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

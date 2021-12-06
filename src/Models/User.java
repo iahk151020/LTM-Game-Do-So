@@ -11,8 +11,8 @@ import java.io.Serializable;
  * @author iahk1510
  */
 public class User implements Serializable{
-    private int id, win=0, lose=0, status=0;
-    private String username = null, fullname, password =  null;
+    private int id=0, win=0, lose=0, status=0;
+    private String username = null, fullname=null, password =  null;
 
     public User(int id, String username, String fullname, String password) {
         this.id = id;
@@ -24,6 +24,12 @@ public class User implements Serializable{
     public User(int id, String fullname) {
         this.id = id;
         this.fullname = fullname;
+    }
+
+    public User(String username, String password) {
+//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.username = username;
+        this.password = password;
     }
 
     public int getId() {

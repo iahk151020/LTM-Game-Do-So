@@ -16,6 +16,7 @@ import View.Home;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.ObjectOutputStream;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,7 +33,7 @@ public class ClientController {
     private WriteThread wt;
     public ClientController(Home homeView) throws IOException {
         this.homeView = homeView;
-        homeView.addListener(new Login());
+        homeView.addListener(new Login()); //add Listener vào View
         socket = new Socket("localhost", 9090);
         rt = new ReadThread(socket);
         wt = new WriteThread(socket);
@@ -100,12 +101,13 @@ public class ClientController {
         @Override
         public void actionPerformed(ActionEvent ae) {
             try {
-                User userInfo = homeView.getUser();
+                User userInfo = homeView.getLogin();
                 req = new Request(1, userInfo);
                 wt.resume();
                 Thread.sleep(1000); //Nếu gửi request để nhận dữ liệu thì gọi Thread.sleep(1000) để nó chờ lấy dữ liệu trong 1s
-                if (res.getData() != null){
-                    homeView.nextUI("main"); //chuuyển qua giao diện MAIN sau khi login
+                if (res.getData() != null){ //Kiểm tra dữ liệu xem có khác null 
+                    user = (User)res.getData();
+                    homeView.nextUI("main"); //chuuyển qua giao diện MAIN sau khi login thành công
                 } else {
                     JOptionPane.showMessageDialog(homeView, "Thông tin đăng nhập không chính xác");
                 }
@@ -125,6 +127,23 @@ public class ClientController {
     //3.Register Listener
     
     //4.GetOnlinePlayer Listener
+    class GetOnlinePlayer implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            try {
+                req = new Request(4, null);
+                wt.resume();
+                Thread.sleep(1000);
+                List<User> onlinePlayers = (List<User>)res.getData();
+                homeView.setOnlinePlayer(onlinePlayers);
+                homeView.nextUI("challenge");
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }
     
     //5.SendChallenge Listener
     
