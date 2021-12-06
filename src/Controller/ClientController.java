@@ -16,6 +16,7 @@ import View.Home;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.ObjectOutputStream;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -126,6 +127,23 @@ public class ClientController {
     //3.Register Listener
     
     //4.GetOnlinePlayer Listener
+    class GetOnlinePlayer implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            try {
+                req = new Request(4, null);
+                wt.resume();
+                Thread.sleep(1000);
+                List<User> onlinePlayers = (List<User>)res.getData();
+                homeView.setOnlinePlayer(onlinePlayers);
+                homeView.nextUI("challenge");
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }
     
     //5.SendChallenge Listener
     
