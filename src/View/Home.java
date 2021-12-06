@@ -7,6 +7,7 @@ package View;
 import Models.User;
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 /**
  *
@@ -106,6 +107,10 @@ public class Home extends javax.swing.JFrame {
 
     public void nextUI(String ui) {
         cl.show(this, ui);
+    }
+
+    public void setOnlinePlayer(List<User> onlinePlayers) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

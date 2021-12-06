@@ -31,7 +31,13 @@ public class UserDao extends DAO{
             return user;
         }
         return null;
-        
+    }
+    
+    public void online(User user) throws SQLException, SQLException{
+        String sql = "update tbluser set status = 1 where userid = ?";
+        PreparedStatement st = con.prepareStatement(sql);
+        st.setInt(1, user.getId());
+        st.execute();
     }
     
 }

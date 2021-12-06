@@ -97,9 +97,11 @@ public class Login extends javax.swing.JPanel {
         return new User(username, password);
     }
     
-    public void listener(ActionListener login){
+    public void addListener(ActionListener login){
         jButton1.addActionListener(login); //Thêm login listener vào button thực hiện nó; (login button)
     }
+    
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
