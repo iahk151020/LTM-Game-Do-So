@@ -27,7 +27,7 @@ public class ServerController {
     private List<User> onlinePlayers;
     private UserDao userDao;
    
-    public ServerController() throws IOException {
+    public ServerController() throws IOException, ClassNotFoundException, SQLException {
         onlinePlayers = new ArrayList<User>();
         serverSocket = new ServerSocket(port);
         userDao = new UserDao();
