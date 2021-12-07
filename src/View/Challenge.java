@@ -6,6 +6,7 @@
 package vieltm;
 
 import java.awt.CardLayout;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,9 +18,12 @@ public class Challenge extends javax.swing.JPanel {
      * Creates new form Challenge
      */
     private CardLayout cl;
+    DefaultTableModel model;
+    
     public Challenge(CardLayout cl) {
         initComponents();
         this.cl = cl;
+        model = (DefaultTableModel) jTable1.getModel();
     }
 
     /**

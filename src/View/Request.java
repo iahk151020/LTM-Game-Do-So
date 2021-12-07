@@ -6,6 +6,7 @@
 package vieltm;
 
 import java.awt.CardLayout;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,9 +18,11 @@ public class Request extends javax.swing.JPanel {
      * Creates new form Request
      */
     private CardLayout cl;
+    DefaultTableModel model;
     public Request(CardLayout cl) {
         initComponents();
         this.cl = cl;
+        model = (DefaultTableModel) jTable1.getModel();
     }
 
     /**
