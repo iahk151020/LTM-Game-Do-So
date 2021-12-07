@@ -106,7 +106,7 @@ public class Home extends javax.swing.JFrame {
     }
 
     public void nextUI(String ui) {
-        cl.show(this, ui);
+        cl.show(this.getContentPane(), ui);
     }
 
     public void setOnlinePlayer(List<User> onlinePlayers) {
