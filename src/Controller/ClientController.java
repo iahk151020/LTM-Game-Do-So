@@ -44,18 +44,19 @@ public class ClientController {
     
     class ReadThread extends Thread{
         
-        protected Socket socket;
+        protected Socket clientSocket;
         
-        public ReadThread(Socket socket) {
-            this.socket = socket;
+        public ReadThread(Socket csocket) {
+            this.clientSocket = csocket;
         }
         
         @Override
         public void run(){
             try {
-                ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+                ObjectInputStream ois = new ObjectInputStream(clientSocket.getInputStream());
                 while (true){
                     res = (Response)ois.readObject();
+                    System.out.println("1 " + res);
                 }
             } catch (IOException ex) {
                 Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,29 +70,23 @@ public class ClientController {
 
     class WriteThread extends Thread{
 
-        protected Socket socket;
-        public WriteThread(Socket soket) {
-            this.socket = socket;
+        protected Socket clientSocket;
+        public WriteThread(Socket csocket) {
+            this.clientSocket = csocket;
         }
         
         @Override
         public void run(){
             ObjectOutputStream oos = null;
             try {
-                oos = new ObjectOutputStream(socket.getOutputStream());
+                oos = new ObjectOutputStream(clientSocket.getOutputStream());
                 while (true){
                     oos.writeObject(req);
                     this.suspend();
                 }
             } catch (IOException ex) {
                 Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    oos.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            } 
         }
         
     }
@@ -105,9 +100,12 @@ public class ClientController {
                 req = new Request(1, userInfo);
                 wt.resume();
                 Thread.sleep(1000); //Nếu gửi request để nhận dữ liệu thì gọi Thread.sleep(1000) để nó chờ lấy dữ liệu trong 1s
+                System.out.println("2 " + res);
                 if (res.getData() != null){ //Kiểm tra dữ liệu xem có khác null 
                     user = (User)res.getData();
                     homeView.nextUI("main"); //chuuyển qua giao diện MAIN sau khi login thành công
+                    res = null;
+                    req = null;
                 } else {
                     JOptionPane.showMessageDialog(homeView, "Thông tin đăng nhập không chính xác");
                 }

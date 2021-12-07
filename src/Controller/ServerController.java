@@ -59,7 +59,9 @@ public class ServerController {
                 switch (req.getType()){
                     case 1:
                         User userInfo = (User)req.getData();
+                        System.out.println("info: " + userInfo.getUsername() + " " + userInfo.getPassword());
                         User user = userDao.checkuser(userInfo);
+                        System.out.println(user);
                         userDao.online(user);
                         onlinePlayers.add(user);
                         oos.writeObject(new Response(1, user));

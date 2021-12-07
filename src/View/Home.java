@@ -106,11 +106,15 @@ public class Home extends javax.swing.JFrame {
     }
 
     public void nextUI(String ui) {
-        cl.show(this, ui);
+        cl.show(this.getContentPane(), ui);
     }
 
     public void setOnlinePlayer(List<User> onlinePlayers) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public User getSelectedPlayer() {
+        return null;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
