@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vieltm;
+package View;
 
 import java.awt.CardLayout;
 import javax.swing.table.DefaultTableModel;
@@ -23,7 +23,10 @@ public class Sent extends javax.swing.JPanel {
         initComponents();
         this.cl = cl;
         model = (DefaultTableModel) jTable1.getModel();
+       
     }
+   
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
