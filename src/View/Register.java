@@ -5,6 +5,8 @@
  */
 package vieltm;
 
+import java.awt.CardLayout;
+
 /**
  *
  * @author HieuTT
@@ -14,8 +16,10 @@ public class Register extends javax.swing.JPanel {
     /**
      * Creates new form Register
      */
-    public Register() {
+    private CardLayout cl;
+    public Register(CardLayout cl) {
         initComponents();
+        this.cl = cl;
     }
 
     /**
