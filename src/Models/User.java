@@ -20,10 +20,19 @@ public class User implements Serializable{
         this.fullname = fullname;
         this.password = password;
     }
-
-    public User(int id, String fullname) {
-        this.id = id;
+    public User(String username, String password, String fullname) {
+        this.username = username;
         this.fullname = fullname;
+        this.password = password;
+    }
+    public User(int id) {
+        this.id = id;
+        
+    }
+    public User(String fullname, int win,int lose){
+        this.fullname = fullname;
+        this.win = win;
+        this.lose = lose;
     }
 
     public User(String username, String password) {
@@ -31,6 +40,8 @@ public class User implements Serializable{
         this.username = username;
         this.password = password;
     }
+
+    
 
     public int getId() {
         return id;

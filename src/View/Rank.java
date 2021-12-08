@@ -3,9 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vieltm;
+package View;
 
+import Models.User;
 import java.awt.CardLayout;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -17,9 +20,14 @@ public class Rank extends javax.swing.JPanel {
      * Creates new form Rank
      */
     private CardLayout cl;
+    DefaultTableModel model;
     public Rank(CardLayout cl) {
         initComponents();
         this.cl = cl;
+    }
+
+    public Rank() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -84,8 +92,8 @@ public class Rank extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(backBtn)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 139, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 34, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -109,8 +117,15 @@ public class Rank extends javax.swing.JPanel {
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
+        cl.show(this.getParent(),"main");
     }//GEN-LAST:event_backBtnActionPerformed
-
+   void setUserRank(List<User> rankPlayer) {
+        int no = 1;
+        this.model.setRowCount(0);
+        for(User u: rankPlayer){
+            this.model.addRow(new Object[]{no++,u.getFullname(), u.getWin(),u.getLose()});
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backBtn;

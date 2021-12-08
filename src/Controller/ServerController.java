@@ -26,6 +26,8 @@ public class ServerController {
     private static int port = 9090;
     private List<User> onlinePlayers;
     private UserDao userDao;
+     private List<User> rankPlayer;
+    
    
     public ServerController() throws IOException, ClassNotFoundException, SQLException {
         onlinePlayers = new ArrayList<User>();
@@ -37,15 +39,17 @@ public class ServerController {
     }
 
     private void listening() throws IOException {
+        
         Socket clientSocket = serverSocket.accept();
         new ServerThread(clientSocket).start();
+        
     }
     
     class ServerThread extends Thread{
         
         protected Socket clientSocket;
-        
-        public ServerThread(Socket clientSocket) {
+        protected Request req = null;
+        public ServerThread(Socket clientSocket) throws IOException {
             this.clientSocket = clientSocket;
         }
         
@@ -55,19 +59,34 @@ public class ServerController {
             try {
                 ois = new ObjectInputStream(clientSocket.getInputStream());
                 ObjectOutputStream oos = new ObjectOutputStream(clientSocket.getOutputStream());
+                while(true){
+                
                 Request req = (Request)ois.readObject();
                 switch (req.getType()){
                     case 1:
                         User userInfo = (User)req.getData();
+                        //System.out.println("info: " + userInfo.getUsername() + " " + userInfo.getPassword());
                         User user = userDao.checkuser(userInfo);
+                       // System.out.println(user);
                         userDao.online(user);
-                        onlinePlayers.add(user);
+                        onlinePlayers.add(user);  
                         oos.writeObject(new Response(1, user));
                         oos.flush();
                         break;
                     case 2:
+                        User userLog= (User)req.getData();
+                        System.out.print(userLog.getId());
+                        boolean log=userDao.logOut(userLog);
+                        oos.writeObject(new Response(2,log));
+                        oos.flush();
+                         System.out.print("then" +log);
+                       // oos.flush();
                         break;
                     case 3: 
+                        User userRegist = (User)req.getData(); 
+                        boolean userR = userDao.resign(userRegist);
+                        oos.writeObject(new Response(3, userR));
+                        oos.flush();
                         break;
                     case 4:
                         oos.writeObject(new Response(4, onlinePlayers));
@@ -85,10 +104,15 @@ public class ServerController {
                         break;
                     case 10: 
                         break;
-                    case 11: 
+                    case 11:   
+                        rankPlayer = userDao.getRank();
+                       //System.out.print(rankPlayer); đoạn này ok rồi à ?
+                        oos.writeObject(new Response(11,rankPlayer));
+                        oos.flush();
                         break;
                     case 12: 
                         break;
+                }
                 }
             
             } catch (IOException ex) {
@@ -97,16 +121,19 @@ public class ServerController {
                 Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
                 Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    ois.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }
+            
+//            } finally {
+//                try {
+//                    ois.close();
+//                } catch (IOException ex) {
+//                    Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
         }
         
     }
+        
     
     
 }

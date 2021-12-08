@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vieltm;
+package View;
 
+import Models.User;
 import java.awt.CardLayout;
-
+import java.awt.event.ActionListener;
+import View.Register;
 /**
  *
  * @author HieuTT
@@ -16,6 +18,7 @@ public class Login extends javax.swing.JPanel {
     /**
      * Creates new form Login
      */
+    
     private CardLayout cl;
     public Login(CardLayout cl) {
         initComponents();
@@ -37,7 +40,7 @@ public class Login extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         passwordtxt = new javax.swing.JTextField();
         LoginBtn = new javax.swing.JToggleButton();
-        SignupBtn = new javax.swing.JToggleButton();
+        SignUpBtn = new javax.swing.JToggleButton();
 
         jLabel1.setText("UserName");
 
@@ -47,32 +50,37 @@ public class Login extends javax.swing.JPanel {
 
         LoginBtn.setText("Login");
 
-        SignupBtn.setText("SignUp");
+        SignUpBtn.setText("SignUp");
+        SignUpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SignUpBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(114, 114, 114)
                         .addComponent(LoginBtn)
                         .addGap(32, 32, 32)
-                        .addComponent(SignupBtn))
+                        .addComponent(SignUpBtn))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(167, 167, 167)
+                        .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel3))
                         .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(passwordtxt)
-                            .addComponent(usernametxt)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(167, 167, 167)
-                        .addComponent(jLabel2)))
-                .addContainerGap(132, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(usernametxt, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+                            .addComponent(passwordtxt))))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,19 +98,38 @@ public class Login extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LoginBtn)
-                    .addComponent(SignupBtn))
+                    .addComponent(SignUpBtn))
                 .addGap(84, 84, 84))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void SignUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpBtnActionPerformed
+                    // TODO add your handling code here:
+     cl.show(this.getParent(),"register");
+       
+    }//GEN-LAST:event_SignUpBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton LoginBtn;
-    private javax.swing.JToggleButton SignupBtn;
+    private javax.swing.JToggleButton SignUpBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField passwordtxt;
     private javax.swing.JTextField usernametxt;
     // End of variables declaration//GEN-END:variables
+
+    void addListener(ActionListener login) {
+        LoginBtn.addActionListener(login);
+        
+    }
+    void addListenChuyen(ActionListener e){
+        SignUpBtn.addActionListener(e);
+        
+    }
+
+    User getLogin() {
+        return new User(usernametxt.getText(), passwordtxt.getText());
+    }
 }

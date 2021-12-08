@@ -14,10 +14,13 @@ import java.util.List;
  * @author iahk1510
  */
 public class Home extends javax.swing.JFrame {
-
+    private User user;
+    private int idPlayer;
     private CardLayout cl;
     private Login loginV;
     private MainUI mainV;
+    private Register registerV;
+    private Rank rankV;
     
     public Home() {
         initComponents();
@@ -26,10 +29,14 @@ public class Home extends javax.swing.JFrame {
         
         loginV = new Login(cl);
         mainV = new MainUI(cl);
+        registerV= new Register(cl);
+        rankV=new Rank(cl);
         
         //Thêm các View Panel vào Home JFrame 
         this.add(loginV, "login");
         this.add(mainV, "main");
+        this.add(registerV,"register");
+        this.add(rankV,"rank");
         
         
         
@@ -96,23 +103,47 @@ public class Home extends javax.swing.JFrame {
             }
         });
     }
-
+ public void nextUI(String ui) {
+        cl.show(this.getContentPane(), ui);
+    }
     public void addListener(ActionListener login) {
          loginV.addListener(login); //Add Login Listener vào Login view;
+         
     }
-
+    public void addListenerRegist(ActionListener register){
+        registerV.addListener(register);
+        
+    }
+   public void addListenChuyen(ActionListener e){
+       loginV.addListenChuyen(e);
+   }
+   public void addListenLogout(ActionListener e){
+       mainV.addListenerlogout(e);
+   }
+    
     public User getLogin() {
         return loginV.getLogin();
     }
-
-    public void nextUI(String ui) {
-        cl.show(this, ui);
-    }
-
+    
+   
+   
     public void setOnlinePlayer(List<User> onlinePlayers) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+    }
+    
+    public void setUserRank(List<User> userRank){
+        rankV.setUserRank(userRank);
     }
 
+    public User getRegister() {
+         return registerV.getRegister();
+    }
+
+
+    public void addListenRank(ActionListener e) {
+        mainV.addListenerRank(e);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }
