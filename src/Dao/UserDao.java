@@ -40,4 +40,11 @@ public class UserDao extends DAO{
         st.execute();
     }
     
+    public boolean logout(User user) throws SQLException{
+        String sql = "update tbluser set status = 0 where id = ? ";
+        PreparedStatement st = con.prepareStatement(sql);
+        st.setInt(1, user.getId());
+        return st.execute();
+    }
+    
 }

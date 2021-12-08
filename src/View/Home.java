@@ -18,6 +18,7 @@ public class Home extends javax.swing.JFrame {
     private CardLayout cl;
     private Login loginV;
     private MainUI mainV;
+    private Challenge challengeV;
     
     public Home() {
         initComponents();
@@ -26,10 +27,12 @@ public class Home extends javax.swing.JFrame {
         
         loginV = new Login(cl);
         mainV = new MainUI(cl);
+        challengeV = new Challenge(cl);
         
         //Thêm các View Panel vào Home JFrame 
         this.add(loginV, "login");
         this.add(mainV, "main");
+        this.add(challengeV, "challenge");
         
         
         
@@ -97,8 +100,9 @@ public class Home extends javax.swing.JFrame {
         });
     }
 
-    public void addListener(ActionListener login) {
+    public void addListener(ActionListener login, ActionListener logout, ActionListener getOnlinePlayer) {
          loginV.addListener(login); //Add Login Listener vào Login view;
+         mainV.addListener(logout, getOnlinePlayer);
     }
 
     public User getLogin() {
@@ -110,7 +114,7 @@ public class Home extends javax.swing.JFrame {
     }
 
     public void setOnlinePlayer(List<User> onlinePlayers) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        challengeV.setOnlinePlayer(onlinePlayers);
     }
 
     public User getSelectedPlayer() {
