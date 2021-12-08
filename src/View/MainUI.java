@@ -1,15 +1,15 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package View;
 
 import java.awt.CardLayout;
+import java.awt.event.ActionListener;
 
 /**
  *
- * @author HieuTT
+ * @author iahk1510
  */
 public class MainUI extends javax.swing.JPanel {
 
@@ -17,6 +17,7 @@ public class MainUI extends javax.swing.JPanel {
      * Creates new form MainUI
      */
     private CardLayout cl;
+    
     public MainUI(CardLayout cl) {
         initComponents();
         this.cl = cl;
@@ -31,123 +32,80 @@ public class MainUI extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        challengeBtn = new javax.swing.JButton();
-        sentBtn = new javax.swing.JButton();
-        requestBtn = new javax.swing.JButton();
-        rankBtn = new javax.swing.JButton();
-        logoutBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
-        challengeBtn.setText("Challenge");
-        challengeBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                challengeBtnActionPerformed(evt);
-            }
-        });
+        jLabel1.setText("GAME DO SO");
 
-        sentBtn.setText("Sent");
-        sentBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                sentBtnActionPerformed(evt);
-            }
-        });
+        jButton1.setText("Logout");
 
-        requestBtn.setText("Request");
-        requestBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                requestBtnActionPerformed(evt);
-            }
-        });
+        jButton2.setText("Challenge");
 
-        rankBtn.setText("Rank");
-        rankBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rankBtnActionPerformed(evt);
-            }
-        });
+        jButton3.setText("Sent");
 
-        logoutBtn.setText("LogOut");
-        logoutBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                logoutBtnActionPerformed(evt);
-            }
-        });
+        jButton4.setText("Request");
 
-        jLabel1.setText("Welcome,");
+        jButton5.setText("Rank");
 
-        jLabel3.setText("GAME DO SO");
+        jLabel2.setText("Welcome.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(79, 79, 79)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
-                .addComponent(logoutBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(104, 104, 104)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(rankBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(requestBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(sentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(challengeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(94, 94, 94)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButton5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(65, 65, 65))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(jLabel3))
-                    .addComponent(logoutBtn))
-                .addGap(30, 30, 30)
-                .addComponent(challengeBtn)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel2))
+                .addGap(78, 78, 78)
+                .addComponent(jButton2)
                 .addGap(18, 18, 18)
-                .addComponent(sentBtn)
+                .addComponent(jButton3)
                 .addGap(18, 18, 18)
-                .addComponent(requestBtn)
+                .addComponent(jButton4)
                 .addGap(18, 18, 18)
-                .addComponent(rankBtn)
-                .addContainerGap(102, Short.MAX_VALUE))
+                .addComponent(jButton5)
+                .addContainerGap(114, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void challengeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_challengeBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_challengeBtnActionPerformed
-
-    private void sentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sentBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_sentBtnActionPerformed
-
-    private void requestBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_requestBtnActionPerformed
-
-    private void rankBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rankBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rankBtnActionPerformed
-
-    private void logoutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_logoutBtnActionPerformed
+    void addListener(ActionListener logout, ActionListener onlinePlayer) {
+        jButton1.addActionListener(logout);
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton challengeBtn;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JButton logoutBtn;
-    private javax.swing.JButton rankBtn;
-    private javax.swing.JButton requestBtn;
-    private javax.swing.JButton sentBtn;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

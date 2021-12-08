@@ -5,7 +5,9 @@
  */
 package View;
 
+import Models.User;
 import java.awt.CardLayout;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -143,4 +145,11 @@ public class Challenge extends javax.swing.JPanel {
     private javax.swing.JTable jTable1;
     private javax.swing.JButton logoutBtn;
     // End of variables declaration//GEN-END:variables
+
+    void setOnlinePlayer(List<User> onlinePlayers) {
+        this.model.setRowCount(0);
+        for(User u: onlinePlayers){
+            this.model.addRow(new Object[]{u.getId(), u.getFullname()});
+        }
+    }
 }

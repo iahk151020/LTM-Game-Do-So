@@ -44,18 +44,22 @@ public class ServerController {
     class ServerThread extends Thread{
         
         protected Socket clientSocket;
-        
-        public ServerThread(Socket clientSocket) {
+
+        protected Request req = null;
+        public ServerThread(Socket clientSocket) throws IOException {
             this.clientSocket = clientSocket;
+ 
         }
         
         @Override
         public void run(){
             ObjectInputStream ois = null;
             try {
-                ois = new ObjectInputStream(clientSocket.getInputStream());
-                ObjectOutputStream oos = new ObjectOutputStream(clientSocket.getOutputStream());
-                Request req = (Request)ois.readObject();
+                ois = new ObjectInputStream(this.clientSocket.getInputStream());
+                ObjectOutputStream oos = new ObjectOutputStream(this.clientSocket.getOutputStream());
+                while(true){
+                req = (Request)ois.readObject();
+                System.out.println("req type :" + req.getType());
                 switch (req.getType()){
                     case 1:
                         User userInfo = (User)req.getData();
@@ -68,6 +72,18 @@ public class ServerController {
                         oos.flush();
                         break;
                     case 2:
+                        User userOut = (User)req.getData();
+                        System.out.println("out: " + userOut.getFullname());
+                        for(User on: onlinePlayers){
+                            if (on.equals(userOut)){
+                                onlinePlayers.remove(on);
+                                break;
+                            }
+                        }
+                        boolean success = userDao.logout(userOut);
+                        System.out.println("success: " + success);
+                        oos.writeObject(new Response(2, success));
+                        oos.flush();
                         break;
                     case 3: 
                         break;
@@ -92,20 +108,18 @@ public class ServerController {
                     case 12: 
                         break;
                 }
+               }
             
+          
             } catch (IOException ex) {
                 Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
                 Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
-            } finally {
-                try {
-                    ois.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
-                }
             }
+            
+            
         }
         
     }

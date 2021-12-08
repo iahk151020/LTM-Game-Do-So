@@ -12,14 +12,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author HieuTT
  */
-public class Request extends javax.swing.JPanel {
+public class Requests extends javax.swing.JPanel {
 
     /**
      * Creates new form Request
      */
     private CardLayout cl;
     DefaultTableModel model;
-    public Request(CardLayout cl) {
+    public Requests(CardLayout cl) {
         initComponents();
         this.cl = cl;
         model = (DefaultTableModel) jTable1.getModel();
