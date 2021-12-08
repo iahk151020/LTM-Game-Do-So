@@ -96,6 +96,7 @@ public class MainUI extends javax.swing.JPanel {
 
     void addListener(ActionListener logout, ActionListener onlinePlayer) {
         jButton1.addActionListener(logout);
+        jButton2.addActionListener(onlinePlayer);
     }
 
 

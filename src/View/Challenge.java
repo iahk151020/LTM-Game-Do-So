@@ -7,6 +7,7 @@ package View;
 
 import Models.User;
 import java.awt.CardLayout;
+import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -151,5 +152,15 @@ public class Challenge extends javax.swing.JPanel {
         for(User u: onlinePlayers){
             this.model.addRow(new Object[]{u.getId(), u.getFullname()});
         }
+    }
+
+    void addListener(ActionListener logout, ActionListener sendChallenge) {
+        logoutBtn.addActionListener(logout);
+        challengeBtn.addActionListener(sendChallenge);
+    }
+
+    int getTo() {
+        int row = jTable1.getSelectedRow();
+        return Integer.parseInt(this.model.getValueAt(row, 0).toString());
     }
 }

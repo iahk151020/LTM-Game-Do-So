@@ -100,9 +100,10 @@ public class Home extends javax.swing.JFrame {
         });
     }
 
-    public void addListener(ActionListener login, ActionListener logout, ActionListener getOnlinePlayer) {
+    public void addListener(ActionListener login, ActionListener logout, ActionListener getOnlinePlayer, ActionListener SendChallenge) {
          loginV.addListener(login); //Add Login Listener vào Login view;
          mainV.addListener(logout, getOnlinePlayer);
+         challengeV.addListener(logout, SendChallenge);
     }
 
     public User getLogin() {
@@ -119,6 +120,10 @@ public class Home extends javax.swing.JFrame {
 
     public User getSelectedPlayer() {
         return null;
+    }
+
+    public int getTo() {
+        return challengeV.getTo();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

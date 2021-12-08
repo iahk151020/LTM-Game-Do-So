@@ -4,6 +4,7 @@
  */
 package Controller;
 
+import Dao.ChallengeDao;
 import Dao.UserDao;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -26,11 +27,13 @@ public class ServerController {
     private static int port = 9090;
     private List<User> onlinePlayers;
     private UserDao userDao;
+    private ChallengeDao challengeDao;
    
     public ServerController() throws IOException, ClassNotFoundException, SQLException {
         onlinePlayers = new ArrayList<User>();
         serverSocket = new ServerSocket(port);
         userDao = new UserDao();
+        challengeDao = new ChallengeDao();
         while (true){
             listening();
         }
@@ -74,12 +77,11 @@ public class ServerController {
                     case 2:
                         User userOut = (User)req.getData();
                         System.out.println("out: " + userOut.getFullname());
-                        for(User on: onlinePlayers){
-                            if (on.equals(userOut)){
-                                onlinePlayers.remove(on);
-                                break;
+                        for(int i=0; i<onlinePlayers.size(); i++)
+                            if(onlinePlayers.get(i).getId() == userOut.getId()){
+                                onlinePlayers.remove(i);
                             }
-                        }
+                        System.out.println("size: " + onlinePlayers.size());
                         boolean success = userDao.logout(userOut);
                         System.out.println("success: " + success);
                         oos.writeObject(new Response(2, success));
@@ -92,6 +94,8 @@ public class ServerController {
                         oos.flush();
                         break;
                     case 5: 
+                        Challenge challenge = (Challenge)req.getData();
+                        challengeDao.addChallenge(challenge);
                         break;
                     case 6: 
                         break;

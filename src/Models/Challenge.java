@@ -11,10 +11,15 @@ import java.io.Serializable;
  * @author iahk1510
  */
 public class Challenge implements Serializable{
-    private int id, from, to, status = 0;
+    private int id = 0, from, to, status = 0;
 
     public Challenge(int id, int from, int to) {
         this.id = id;
+        this.from = from;
+        this.to = to;
+    }
+
+    public Challenge(int from, int to) {
         this.from = from;
         this.to = to;
     }

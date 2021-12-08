@@ -34,7 +34,7 @@ public class ClientController {
    
     public ClientController(Home homeView) throws IOException {
         this.homeView = homeView;
-        homeView.addListener(new Login(), new Logout(), new GetOnlinePlayer()); //add Listener vào View
+        homeView.addListener(new Login(), new Logout(), new GetOnlinePlayer(), new SendChallenge()); //add Listener vào View
         socket = new Socket("localhost", 9090);
         rt = new ReadThread(socket);
         wt = new WriteThread(socket);
@@ -170,7 +170,7 @@ public class ClientController {
         public void actionPerformed(ActionEvent ae) {
             try {
                 req = new Request(4, null);
-//                wt.resume();
+                wt.resume();
                 Thread.sleep(1000);
                 List<User> onlinePlayers = (List<User>)res.getData();
                 homeView.setOnlinePlayer(onlinePlayers);
@@ -189,16 +189,26 @@ public class ClientController {
 
         @Override
         public void actionPerformed(ActionEvent ae) {
-           User selectedPlayer = homeView.getSelectedPlayer();
-           req = new Request(5, selectedPlayer);
-//           wt.resume();
-           req = null;
-           res = null;
+           int to = homeView.getTo();
+           int from = user.getId();
+           System.out.println("f: " + from + " " + to);
+           req = new Request(5, new Challenge(from, to));
+           wt.resume();
+          
         }
         
     }
     
     //6.GetSentChallenge Listener
+//    class GetSentChallenge implements ActionListener{
+//
+//        @Override
+//        public void actionPerformed(ActionEvent ae) {
+//           int to = user.getId();
+//           req = new Request(6,)
+//        }
+//        
+//    }
     
     //7.JoinGame listener;
     
