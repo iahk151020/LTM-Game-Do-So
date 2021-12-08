@@ -44,20 +44,20 @@ public class ServerController {
     class ServerThread extends Thread{
         
         protected Socket clientSocket;
-        protected ObjectInputStream ois = null;
-        protected ObjectOutputStream oos = null;
+
         protected Request req = null;
         public ServerThread(Socket clientSocket) throws IOException {
             this.clientSocket = clientSocket;
-            ois = new ObjectInputStream(this.clientSocket.getInputStream());
-            oos = new ObjectOutputStream(this.clientSocket.getOutputStream());
+ 
         }
         
         @Override
         public void run(){
+            ObjectInputStream ois = null;
             try {
-                
-          
+                ois = new ObjectInputStream(this.clientSocket.getInputStream());
+                ObjectOutputStream oos = new ObjectOutputStream(this.clientSocket.getOutputStream());
+                while(true){
                 req = (Request)ois.readObject();
                 System.out.println("req type :" + req.getType());
                 switch (req.getType()){
@@ -116,6 +116,10 @@ public class ServerController {
             } catch (SQLException ex) {
                 Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
             } 
+            } catch (IOException ex) {
+                Logger.getLogger(ServerController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
             
         }
         
