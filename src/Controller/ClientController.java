@@ -30,21 +30,23 @@ public class ClientController {
     public Response res = null;
     public Request req = null;
     private ReadThread rt;
+    private WriteThread wt;
    
     public ClientController(Home homeView) throws IOException {
         this.homeView = homeView;
         homeView.addListener(new Login(), new Logout(), new GetOnlinePlayer()); //add Listener vào View
         socket = new Socket("localhost", 9090);
         rt = new ReadThread(socket);
+        wt = new WriteThread(socket);
         rt.start();
-//        wt.start();
-//        wt.suspend();
+        wt.start();
+        wt.suspend();
     }
     
-    public void sendData(Object data) throws IOException{
-        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-        oos.writeObject(data);
-    }
+//    public void sendData(Object data) throws IOException{
+//        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+//        oos.writeObject(data);
+//    }
     
     class ReadThread extends Thread{
         
@@ -74,6 +76,33 @@ public class ClientController {
         
     }
     
+    class WriteThread extends Thread{
+        private Socket clientSocket;
+
+        public WriteThread(Socket clientSocket) {
+            this.clientSocket = clientSocket;
+        }
+         @Override
+         public void run(){
+             ObjectOutputStream oos = null;
+            try {
+                oos = new ObjectOutputStream(this.clientSocket.getOutputStream());
+                while (true){
+                    oos.writeObject(req);
+                    this.suspend();
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            } finally {
+                try {
+                    oos.close();
+                } catch (IOException ex) {
+                    Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+         }
+    }
+    
 
     
     class Login implements ActionListener{
@@ -83,8 +112,8 @@ public class ClientController {
             try {
                 User userInfo = homeView.getLogin();
                 req = new Request(1, userInfo);
-                sendData(req);
-//                wt.resume();
+//                sendData(req);
+                wt.resume();
                 Thread.sleep(1000); //Nếu gửi request để nhận dữ liệu thì gọi Thread.sleep(1000) để nó chờ lấy dữ liệu trong 1s
                 if (res.getData() != null){ //Kiểm tra dữ liệu xem có khác null 
                     user = (User)res.getData();
@@ -96,8 +125,6 @@ public class ClientController {
                     JOptionPane.showMessageDialog(homeView, "Thông tin đăng nhập không chính xác");
                 }
             } catch (InterruptedException ex) {
-                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
                 Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
@@ -115,11 +142,11 @@ public class ClientController {
         public void actionPerformed(ActionEvent ae) {
             try {
                 req = new Request(2, user);
-//                wt.resume();
-                sendData(req);
+                wt.resume();
+//                sendData(req);
                 Thread.sleep(1000);
-                boolean success = (Boolean)res.getData();
-                if (success){
+               
+                if ((boolean)res.getData()){
                     homeView.nextUI("login");
                     req = null;
                     res = null;
@@ -128,8 +155,6 @@ public class ClientController {
                     JOptionPane.showMessageDialog(homeView, "LOGOUT ERROR");
                 }
             } catch (InterruptedException ex) {
-                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
                 Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
