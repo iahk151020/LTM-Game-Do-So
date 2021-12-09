@@ -133,6 +133,7 @@ public class Challenge extends javax.swing.JPanel {
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
+        cl.show(this.getParent(), "main");
     }//GEN-LAST:event_backBtnActionPerformed
 
 

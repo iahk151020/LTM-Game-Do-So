@@ -4,6 +4,7 @@
  */
 package View;
 
+import Models.Question;
 import Models.User;
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
@@ -19,7 +20,9 @@ public class Home extends javax.swing.JFrame {
     private Login loginV;
     private MainUI mainV;
     private Challenge challengeV;
-    
+    private Sent sentV;
+    private Requests requestV;
+    private GameRoom gameroomV;
     public Home() {
         initComponents();
         cl = new CardLayout();
@@ -28,13 +31,17 @@ public class Home extends javax.swing.JFrame {
         loginV = new Login(cl);
         mainV = new MainUI(cl);
         challengeV = new Challenge(cl);
+        sentV = new Sent(cl);
+        requestV = new Requests(cl);
+        gameroomV = new GameRoom(cl);
         
         //Thêm các View Panel vào Home JFrame 
         this.add(loginV, "login");
         this.add(mainV, "main");
         this.add(challengeV, "challenge");
-        
-        
+        this.add(sentV, "sent");
+        this.add(requestV, "request");
+        this.add(gameroomV, "gameroom");
         
         
         
@@ -100,10 +107,14 @@ public class Home extends javax.swing.JFrame {
         });
     }
 
-    public void addListener(ActionListener login, ActionListener logout, ActionListener getOnlinePlayer, ActionListener SendChallenge) {
+    public void addListener(ActionListener login, ActionListener logout, ActionListener getOnlinePlayer, ActionListener SendChallenge
+    , ActionListener getSent, ActionListener getChallengeList, ActionListener refuse, ActionListener accept) {
          loginV.addListener(login); //Add Login Listener vào Login view;
-         mainV.addListener(logout, getOnlinePlayer);
+         mainV.addListener(logout, getOnlinePlayer, getSent, getChallengeList);
          challengeV.addListener(logout, SendChallenge);
+         requestV.addListener(logout, refuse, accept);
+        
+         
     }
 
     public User getLogin() {
@@ -124,6 +135,36 @@ public class Home extends javax.swing.JFrame {
 
     public int getTo() {
         return challengeV.getTo();
+    }
+
+    public void setSent(List<Models.Challenge> sent) {
+        sentV.setSent(sent);
+    }
+
+    public void setChallengeList(List<Models.Challenge> chList) {
+        requestV.setChallengeList(chList);
+    }
+
+    public int getRefuse() {
+        return requestV.getRefuse();
+    }
+
+    public void removeRefuse() {
+        requestV.removeRefuse();
+    }
+
+    public int getAccept() {
+        return requestV.getAccept();
+    }
+
+    public void removeAccept() {
+        requestV.removeAccept();
+                
+    }
+
+
+    public void setQues(List<Question> ques) {
+        gameroomV.setQues(ques);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

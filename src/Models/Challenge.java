@@ -18,6 +18,13 @@ public class Challenge implements Serializable{
         this.from = from;
         this.to = to;
     }
+    
+        public Challenge(int id, int from, int to, int status) {
+        this.id = id;
+        this.from = from;
+        this.to = to;
+        this.status = status;
+    }
 
     public Challenge(int from, int to) {
         this.from = from;

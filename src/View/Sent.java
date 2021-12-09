@@ -5,7 +5,9 @@
  */
 package View;
 
+import Models.Challenge;
 import java.awt.CardLayout;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -133,4 +135,12 @@ public class Sent extends javax.swing.JPanel {
     private javax.swing.JButton joingameBtn;
     private javax.swing.JButton logoutBtn;
     // End of variables declaration//GEN-END:variables
+
+    void setSent(List<Challenge> sent) {
+        this.model.setRowCount(0);
+        for(Challenge se: sent){
+            this.model.addRow(new Object[]{se.getId(), se.getTo(), se.getStatus() == 1 ? "accepted" : "pending"});
+        }
+                
+    }
 }

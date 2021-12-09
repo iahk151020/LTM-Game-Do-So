@@ -34,7 +34,8 @@ public class ClientController {
    
     public ClientController(Home homeView) throws IOException {
         this.homeView = homeView;
-        homeView.addListener(new Login(), new Logout(), new GetOnlinePlayer(), new SendChallenge()); //add Listener vào View
+        homeView.addListener(new Login(), new Logout(), new GetOnlinePlayer(), new SendChallenge()
+        , new GetSentChallenge(), new GetChallengeList(), new Refuse(), new Accept()); //add Listener vào View
         socket = new Socket("localhost", 9090);
         rt = new ReadThread(socket);
         wt = new WriteThread(socket);
@@ -200,24 +201,85 @@ public class ClientController {
     }
     
     //6.GetSentChallenge Listener
-//    class GetSentChallenge implements ActionListener{
-//
-//        @Override
-//        public void actionPerformed(ActionEvent ae) {
-//           int to = user.getId();
-//           req = new Request(6,)
-//        }
-//        
-//    }
+    class GetSentChallenge implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            try {
+                int from = user.getId();
+                req = new Request(6, from);
+                wt.resume();
+                Thread.sleep(1000);
+                List<Challenge> sent = (List<Challenge>)res.getData();
+                homeView.setSent(sent);
+                homeView.nextUI("sent");
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }
     
     //7.JoinGame listener;
     
     //8.GetChallengeList lisnter;
+    class GetChallengeList implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            try {
+                int to = user.getId();
+                req = new Request(8, to);
+                wt.resume();
+                Thread.sleep(1000);
+                List<Challenge> chList = (List<Challenge>)res.getData();
+                homeView.setChallengeList(chList);
+                homeView.nextUI("request");
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }
     
     //9.Accept listener
+    class Accept implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            try {
+                int accept = homeView.getAccept();
+                req = new Request(9, accept);
+                wt.resume();
+                Thread.sleep(1000);
+                List<Question> ques = (List<Question>)res.getData();
+                homeView.setQues(ques);
+                homeView.removeAccept();
+                homeView.nextUI("gameroom");
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+    }
     
     //10.Refuse listener
-    
+     class Refuse implements ActionListener{
+        
+
+        @Override
+        public void actionPerformed(ActionEvent ae) {
+            try {
+                int challengeId = homeView.getRefuse();
+                req = new Request(10, challengeId);
+                wt.resume();
+                Thread.sleep(1000);
+                homeView.removeRefuse();
+            } catch (InterruptedException ex) {
+                Logger.getLogger(ClientController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+     }
     //11.GetRank listener
     
     //12.Submit listener

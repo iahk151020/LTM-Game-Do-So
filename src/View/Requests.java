@@ -5,7 +5,10 @@
  */
 package View;
 
+import Models.Challenge;
 import java.awt.CardLayout;
+import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -51,7 +54,7 @@ public class Requests extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Challenge ID", "Status"
+                "Challenge ID", "From userID"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -136,4 +139,36 @@ public class Requests extends javax.swing.JPanel {
     private javax.swing.JButton logoutBtn;
     private javax.swing.JButton refuseBtn;
     // End of variables declaration//GEN-END:variables
+
+    void setChallengeList(List<Challenge> chList) { 
+        this.model.setRowCount(0);
+        for(Challenge ch: chList){
+            this.model.addRow(new Object[]{ch.getId(), ch.getFrom()});
+        }
+    }
+
+    void addListener(ActionListener logout, ActionListener refuse, ActionListener accept) {
+        logoutBtn.addActionListener(logout);
+        refuseBtn.addActionListener(refuse);
+        accpetBtn.addActionListener(accept);
+    }
+
+    int getRefuse() {
+        return jTable1.getSelectedRow();
+    }
+
+    void removeRefuse() {
+        int remove = getRefuse();
+        this.model.removeRow(remove);
+    }
+
+    int getAccept() {
+        int row = jTable1.getSelectedRow();
+        return Integer.parseInt(this.model.getValueAt(row, 0).toString());
+    }
+
+    void removeAccept() {
+        int row = jTable1.getSelectedRow();
+        this.model.removeRow(row);
+    }
 }

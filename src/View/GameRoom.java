@@ -5,7 +5,13 @@
  */
 package View;
 
+import Models.Question;
 import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import javax.swing.JButton;
+import Models.*;
 
 /**
  *
@@ -17,7 +23,8 @@ public class GameRoom extends javax.swing.JPanel {
      * Creates new form GameRoom
      */
     private CardLayout cl;
-    
+    private List<Integer> ans = new ArrayList<Integer>();
+    private int gameId;
     public GameRoom(CardLayout cl) {
         initComponents();
         this.cl = cl;
@@ -55,20 +62,60 @@ public class GameRoom extends javax.swing.JPanel {
         });
 
         jButton5.setText("jButton5");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("jButton3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("jButton2");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("jButton7");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("jButton8");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jButton9.setText("jButton9");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton6.setText("jButton6");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         submitBtn.setText("Submit");
 
@@ -160,11 +207,89 @@ public class GameRoom extends javax.swing.JPanel {
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
+        int val = Integer.parseInt(jButton4.getText());
+        if (ans.get(0) == val){
+            ans.remove(0);
+            jButton4.setText("");
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
         // TODO add your handling code here:
+        cl.show(this.getParent(), "main");
     }//GEN-LAST:event_backBtnActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        int val = Integer.parseInt(jButton3.getText());
+        if (ans.get(0) == val){
+            ans.remove(0);
+            jButton3.setText("");
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        int val = Integer.parseInt(jButton7.getText());
+        if (ans.get(0) == val){
+            ans.remove(0);
+            jButton7.setText("");
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        int val = Integer.parseInt(jButton5.getText());
+        if (ans.get(0) == val){
+            ans.remove(0);
+            jButton5.setText("");
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        int val = Integer.parseInt(jButton2.getText());
+        if (ans.get(0) == val){
+            ans.remove(0);
+            jButton2.setText("");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        int val = Integer.parseInt(jButton8.getText());
+        if (ans.get(0) == val){
+            ans.remove(0);
+            jButton8.setText("");
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        int val = Integer.parseInt(jButton6.getText());
+        if (ans.get(0) == val){
+            ans.remove(0);
+            jButton6.setText("");
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int val = Integer.parseInt(jButton1.getText());
+        if (ans.get(0) == val){
+            ans.remove(0);
+            jButton1.setText("");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        // TODO add your handling code here:
+        int val = Integer.parseInt(jButton9.getText());
+        if (ans.get(0) == val){
+            ans.remove(0);
+            jButton9.setText("");
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -183,4 +308,24 @@ public class GameRoom extends javax.swing.JPanel {
     private javax.swing.JButton logoutBtn;
     private javax.swing.JButton submitBtn;
     // End of variables declaration//GEN-END:variables
+
+    void setQues(List<Question> ques) {
+        this.gameId = ques.get(0).getGameId();
+        jButton1.setText(String.valueOf(ques.get(0).getValue()));
+        jButton2.setText(String.valueOf(ques.get(1).getValue()));
+        jButton3.setText(String.valueOf(ques.get(2).getValue()));
+        jButton4.setText(String.valueOf(ques.get(3).getValue()));
+        jButton5.setText(String.valueOf(ques.get(4).getValue()));
+        jButton6.setText(String.valueOf(ques.get(5).getValue()));
+        jButton7.setText(String.valueOf(ques.get(6).getValue()));
+        jButton8.setText(String.valueOf(ques.get(7).getValue()));
+        jButton9.setText(String.valueOf(ques.get(8).getValue()));
+        
+        for(Question q: ques){
+            ans.add(q.getValue());
+        }
+        
+        Collections.sort(ans);
+        
+    }
 }

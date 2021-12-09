@@ -5,6 +5,7 @@
 package Controller;
 
 import Dao.ChallengeDao;
+import Dao.QuestionDao;
 import Dao.UserDao;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -28,12 +29,14 @@ public class ServerController {
     private List<User> onlinePlayers;
     private UserDao userDao;
     private ChallengeDao challengeDao;
+    private QuestionDao questionDao;
    
     public ServerController() throws IOException, ClassNotFoundException, SQLException {
         onlinePlayers = new ArrayList<User>();
         serverSocket = new ServerSocket(port);
         userDao = new UserDao();
         challengeDao = new ChallengeDao();
+        questionDao = new QuestionDao();
         while (true){
             listening();
         }
@@ -98,14 +101,30 @@ public class ServerController {
                         challengeDao.addChallenge(challenge);
                         break;
                     case 6: 
+                        int from = (int)req.getData();
+                        List<Challenge> sent = challengeDao.getSent(from);
+                        oos.writeObject(new Response(6, sent));
+                        oos.flush();
                         break;
                     case 7: 
                         break;
                     case 8: 
+                        int to = (int)req.getData();
+                        List<Challenge> chList = challengeDao.getChallengeList(to);
+                        oos.writeObject(new Response(8, chList));
+                        oos.flush();
                         break;
                     case 9: 
+                        int accept = (int)req.getData();
+                        System.out.println("accpt id: " + accept);
+                        List<Question> ques = questionDao.generateGame(accept);
+                        System.out.println("ques: " + ques);
+                        oos.writeObject(new Response(9, ques));
+                        oos.flush();
                         break;
                     case 10: 
+                        int refuse = (int)req.getData();
+                        challengeDao.refuse(refuse);
                         break;
                     case 11: 
                         break;

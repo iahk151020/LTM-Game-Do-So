@@ -4,8 +4,10 @@
  */
 package View;
 
+import Models.Challenge;
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 /**
  *
@@ -94,9 +96,11 @@ public class MainUI extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    void addListener(ActionListener logout, ActionListener onlinePlayer) {
+    void addListener(ActionListener logout, ActionListener onlinePlayer, ActionListener getSent, ActionListener getChList) {
         jButton1.addActionListener(logout);
         jButton2.addActionListener(onlinePlayer);
+        jButton3.addActionListener(getSent);
+        jButton4.addActionListener(getChList);
     }
 
 
@@ -109,4 +113,6 @@ public class MainUI extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
+
+ 
 }
